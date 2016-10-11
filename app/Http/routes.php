@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () {
+    \Log::info("Connection => ");
     return view('welcome');
 });
 

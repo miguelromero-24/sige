@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'sige'),
 
     /*
     |--------------------------------------------------------------------------
@@ -64,12 +64,23 @@ return [
             'strict'    => false,
         ],
 
-        'pgsql' => [
+        'sige' => [
             'driver'   => 'pgsql',
-            'host'     => env('DB_HOST', 'localhost'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host'     => env('DB_HOST'),
+            'database' => env('DB_DATABASE'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
+            'charset'  => 'utf8',
+            'prefix'   => '',
+            'schema'   => 'public',
+        ],
+
+        'sige_auth' => [
+            'driver'   => 'pgsql',
+            'host'     => env('DB_AUTH'),
+            'database' => env('AUTH_DATABASE'),
+            'username' => env('AUTH_USERNAME'),
+            'password' => env('AUTH_PASSWORD'),
             'charset'  => 'utf8',
             'prefix'   => '',
             'schema'   => 'public',
