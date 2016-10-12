@@ -153,6 +153,9 @@ return [
 
         // HTML
         Collective\Html\HtmlServiceProvider::class,
+        // CollectiveLaravel
+        'Collective\Html\HtmlServiceProvider',
+
     ],
 
     /*
@@ -207,8 +210,11 @@ return [
         'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
 
         // HTML
-        'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class,
+//        'Form' => Collective\Html\FormFacade::class,
+//        'Html' => Collective\Html\HtmlFacade::class,
+        'Form' => 'Collective\Html\FormFacade',
+        'Html' => 'Collective\Html\HtmlFacade',
+
 
     ],
 

@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'session' => 'cartalyst_sentinel',
+    'session' => 'sigesen',
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ return [
     |
     */
 
-    'cookie' => 'cartalyst_sentinel',
+    'cookie' => 'sigesen',
 
     /*
     |--------------------------------------------------------------------------
@@ -53,7 +53,7 @@ return [
 
     'users' => [
 
-        'model' => 'Cartalyst\Sentinel\Users\EloquentUser',
+        'model' => 'App\Models\User',
 
     ],
 
@@ -68,7 +68,7 @@ return [
 
     'roles' => [
 
-        'model' => 'Cartalyst\Sentinel\Roles\EloquentRole',
+        'model' => 'App\Models\Role',
 
     ],
 
@@ -95,7 +95,7 @@ return [
 
     'permissions' => [
 
-        'class' => 'Cartalyst\Sentinel\Permissions\StandardPermissions',
+        'class' => 'App\Models\Permission',
 
     ],
 
@@ -111,9 +111,9 @@ return [
 
     'persistences' => [
 
-        'model' => 'Cartalyst\Sentinel\Persistences\EloquentPersistence',
+        'model' => 'App\Models\Persistence',
 
-        'single' => false,
+        'single' => true,
 
     ],
 
@@ -133,7 +133,7 @@ return [
 
     'checkpoints' => [
 
-        'throttle',
+        //'throttle',
         'activation',
 
     ],
@@ -152,7 +152,7 @@ return [
 
     'activations' => [
 
-        'model' => 'Cartalyst\Sentinel\Activations\EloquentActivation',
+        'model' => 'App\Models\Activation',
 
         'expires' => 259200,
 
@@ -174,7 +174,7 @@ return [
 
     'reminders' => [
 
-        'model' => 'Cartalyst\Sentinel\Reminders\EloquentReminder',
+        'model' => 'App\Models\Reminder',
 
         'expires' => 14400,
 
@@ -226,7 +226,7 @@ return [
 
     'throttling' => [
 
-        'model' => 'Cartalyst\Sentinel\Throttling\EloquentThrottle',
+        'model' => 'App\Models\Throttle',
 
         'global' => [
 

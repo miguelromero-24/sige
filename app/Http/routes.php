@@ -1,21 +1,23 @@
 <?php
 
+
 /*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
+|----------------------------------------------------------------------------------------------------------------------+
+| Authentication & Authorization Routes - Sentinel Implementation                                                      |
+|----------------------------------------------------------------------------------------------------------------------+
 */
 
-Route::get('/', function () {
-    \Log::info("Connection => ");
-    return view('welcome');
-});
+Route::get('login', ['as' => 'login.page', 'uses' => 'Auth\AuthController@loginPage']);
+Route::post('login', ['as' => 'login', 'uses' => 'Auth\AuthController@login']);
+Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@logout']);
+Route::get('reset/{id}/request', ['as' => 'reset.password.request',
+    'uses' => 'Auth\AuthController@resetPasswordRequest']);
+Route::get('reset/{id}/{code}', ['as' => 'reset.password.page', 'uses' => 'Auth\AuthController@resetPasswordPage']);
+Route::post('reset', ['as' => 'reset.password', 'uses' => 'Auth\AuthController@resetPassword']);
 
-Route::any('test', function(){
-    return view('template');
-});
+/*
+|----------------------------------------------------------------------------------------------------------------------+
+| Home and Dashboard Routes                                                                                            |
+|----------------------------------------------------------------------------------------------------------------------+
+*/
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
