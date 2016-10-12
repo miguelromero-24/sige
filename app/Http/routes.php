@@ -21,3 +21,13 @@ Route::post('reset', ['as' => 'reset.password', 'uses' => 'Auth\AuthController@r
 |----------------------------------------------------------------------------------------------------------------------+
 */
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+
+/*
+|----------------------------------------------------------------------------------------------------------------------+
+| User Routes                                                                                                          |
+|----------------------------------------------------------------------------------------------------------------------+
+*/
+
+Route::resource('users', 'UsersController');
+Route::get('users/{id}/profile', ['as' => 'users.show', 'uses' => 'UsersController@show']);
+Route::get('activate/{id}/{code}', ['as'   => 'users.activate', 'uses' => 'UsersController@activate']);
