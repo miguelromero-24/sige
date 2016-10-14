@@ -4,7 +4,7 @@
     </div>
 
     <!--logo start-->
-    <a href="#" class="logo"><span class="lite">Admin</span></a>
+    <a href="#" class="logo"><span class="lite">SIGE</span></a>
     <!--logo end-->
 
     <div class="nav search-row" id="top_menu">

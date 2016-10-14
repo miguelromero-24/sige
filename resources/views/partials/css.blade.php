@@ -21,3 +21,4 @@
 <link href="{{ asset('dash/css/style-responsive.css') }}" rel="stylesheet" />
 <link href="{{ asset('dash/css/xcharts.min.css') }}" rel=" stylesheet">
 <link href="{{ asset('dash/css/jquery-ui-1.10.4.min.css') }}" rel="stylesheet">
+<link href="{{ asset('dash/css/selectize/selectize.bootstrap3.css') }}" rel="stylesheet">

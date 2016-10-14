@@ -41,6 +41,7 @@
 <script src="{{ asset('dash/js/sparklines.js') }}"></script>
 <script src="{{ asset('dash/js/charts.js') }}"></script>
 <script src="{{ asset('dash/js/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('dash/js/selectize/selectize.js') }}"></script>
 <script>
 
     //knob

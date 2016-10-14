@@ -29,8 +29,9 @@
     <!--main content end-->
 </section>
 <!-- container section start -->
-
-@include('partials.javascript')
+@yield('js')
+    @parent
+    @include('partials.javascript')
 
 </body>
 </html>
