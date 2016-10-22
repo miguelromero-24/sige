@@ -66,9 +66,9 @@ class User extends EloquentUser
      * Get Owner Model for User
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function owner()
+    public function school()
     {
-        return $this->belongsTo('App\Models\Owner', 'owner_id');
+        return $this->belongsTo('App\Models\Schools', 'school_id');
     }
 
     /**
@@ -76,9 +76,9 @@ class User extends EloquentUser
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function branch()
+    public function supervision()
     {
-        return $this->belongsTo('App\Models\Branch', 'branch_id');
+        return $this->belongsTo('App\Models\Supervisions', 'supervision_id');
     }
 
     /**
