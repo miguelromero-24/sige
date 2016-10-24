@@ -22,10 +22,9 @@
                         <tbody>
                         @foreach($roles as $role)
                             <tr>
-                                <td>{{ $user->id }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->description}}</td>
-                                <td>{{ $user->email }}</td>
+                                <td>{{ $role->id }}</td>
+                                <td>{{ $role->name }}</td>
+                                <td>{{ $role->description}}</td>
                                 <td>{{ date('d/m/y H:i', strtotime($role->created_at)) }} </td>
                                 <td>{{ date('d/m/y H:i', strtotime($role->updated_at)) }} </td>
                                 <td>
@@ -42,4 +41,12 @@
             </section>
         </div>
     </div>
-@stop
+    {!! Form::open(['route' => ['permissions.destroy', ':ROW_ID'],
+                                         'method' => 'DELETE', 'id' => 'form-delete']) !!}
+    {!! Form::close() !!}
+@endsection
+
+@section('js')
+    @include('partials._delete_row_js')
+@endsection
+

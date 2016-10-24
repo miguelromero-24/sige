@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -35,8 +37,13 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $rolesJson = json_encode(array('role' => 'value'));
-        return view('users.create', compact('rolesJson'));
+        $permissions = Permission::orderBy('permission')->get();
+        $rolesList = Role::all(['id', 'name']);
+        $rolesJson = json_encode($rolesList);
+        $data = ['permissions' => $permissions,
+            'rolesJson' => $rolesJson ];
+
+        return view('users.create', $data);
     }
 
     /**
