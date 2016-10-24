@@ -31,3 +31,17 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::resource('users', 'UsersController');
 Route::get('users/{id}/profile', ['as' => 'users.show', 'uses' => 'UsersController@show']);
 Route::get('activate/{id}/{code}', ['as'   => 'users.activate', 'uses' => 'UsersController@activate']);
+
+/*
+|----------------------------------------------------------------------------------------------------------------------+
+| Roles Routes - Sentinel Implementation                                                                               |
++--------+----------+------------------------------+----------------------+--------------------------------------------+
+*/
+Route::resource('roles', 'RolesController');
+
+/*
+|----------------------------------------------------------------------------------------------------------------------+
+| Permissions Routes - Sentinel Implementation                                                                         |
++--------+----------+------------------------------+--------------------------+----------------------------------------+
+*/
+Route::resource('permissions', 'PermissionsController');

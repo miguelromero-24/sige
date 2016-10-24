@@ -2,21 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class UsersController extends Controller
+class RolesController extends Controller
 {
-
-    /**
-     * Currently logged in User
-     * @var \Cartalyst\Sentinel\Users\UserInterface
-     */
-    protected $user;
-
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +18,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(20);
-        return view('users.index', compact('users'));
+        $roles = Role::paginate(20);
+        return view('roles.index', compact('roles'));
     }
 
     /**
@@ -35,8 +29,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $rolesJson = json_encode(array('role' => 'value'));
-        return view('users.create', compact('rolesJson'));
+        $permissions = Permission::orderBy('permission')->get();
+        return view('roles.create', compact('permissions'));
     }
 
     /**

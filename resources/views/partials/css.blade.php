@@ -2,6 +2,7 @@
 <link href="{{ asset('dash/css/bootstrap.min.css') }}" rel="stylesheet">
 <!-- bootstrap theme -->
 <link href="{{ asset('dash/css/bootstrap-theme.css') }}" rel="stylesheet">
+<link href="{{ asset('dash/css/sweetalert/sweetalert.css') }}" rel="stylesheet">
 <!--external css-->
 <!-- font icon -->
 <link href="{{ asset('dash/css/elegant-icons-style.css') }}" rel="stylesheet" />

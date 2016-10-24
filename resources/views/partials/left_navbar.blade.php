@@ -11,13 +11,14 @@
             </li>
             <li class="sub-menu">
                 <a href="javascript:;" class="">
-                    <i class="icon_balance"></i>
+                    <i class="icon_cogs"></i>
                     <span>Administracion</span>
                     <span class="menu-arrow arrow_carrot-right"></span>
                 </a>
                 <ul class="sub">
-                    <li><a class="" href="{{ route('users.index') }}"><i class="icon_profile"></i>Usuarios</a></li>
-
+                    <li><a class="" href="{{ route('users.index') }}"><i class="icon_profile"></i> Usuarios</a></li>
+                    <li><a href="{{ route('roles.index') }}"><i class="icon_balance"></i> Roles</a></li>
+                    <li><a href="{{ route('permissions.index') }}"><i class="icon_bag"></i> Permisos</a></li>
                     {{--<li><a class="" href="grids.html">Grids</a></li>--}}
                 </ul>
             </li>

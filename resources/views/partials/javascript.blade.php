@@ -1,9 +1,11 @@
 
 
 {{--<!-- javascripts -->--}}
+<script src="{{ asset('dash/js/jquery-2.1.3.min.js') }}"></script>
 <script src="{{ asset('dash/js/jquery.js') }}"></script>
+<script src="{{ asset('dash/js/sweetalert/sweetalert.min.js') }}"></script>
 <script src="{{ asset('dash/js/jquery-ui-1.10.4.min.js') }}"></script>
-<script src="{{ asset('dash/js/jquery-1.8.3.min.js') }}"></script>
+{{--<script src="{{ asset('dash/js/jquery-1.8.3.min.js') }}"></script>--}}
 <script type="text/javascript" src="{{ asset('dash/js/jquery-ui-1.9.2.custom.min.js') }}"></script>
 {{--<!-- bootstrap -->--}}
 <script src="{{ asset('dash/js/bootstrap.min.js') }}"></script>

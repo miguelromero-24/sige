@@ -6,6 +6,8 @@
                 <header class="panel-heading">
                     Usuarios
                 </header>
+                <div class="panel-body">
+                    <a href="{{ route('users.create') }}"><i class="fa fa-plus"></i> Nuevo Usuario</a>
                 <table class="table table-striped table-advance table-hover">
                     <thead>
                     <tr>
@@ -42,6 +44,7 @@
                     @endforeach
                     </tbody>
                 </table>
+                </div>
             </section>
         </div>
     </div>
