@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="img/favicon.png">
     <title>SIGE</title>
     @include('partials.css')
+    @yield('extra_css')
 </head>
 
 <body>
@@ -29,9 +30,7 @@
     <!--main content end-->
 </section>
 <!-- container section start -->
-@yield('js')
-    @parent
     @include('partials.javascript')
-
+    @yield('js')
 </body>
 </html>

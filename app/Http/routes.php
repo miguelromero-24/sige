@@ -45,3 +45,13 @@ Route::resource('roles', 'RolesController');
 +--------+----------+------------------------------+--------------------------+----------------------------------------+
 */
 Route::resource('permissions', 'PermissionsController');
+
+Route::any('mail', function(){
+    \Log::info('Testing email senting');
+    $data = array();
+    Mail::send('welcome', $data,
+        function ($message) {
+            $message->to('mromero1346@gmail.com', 'test')->subject('[SIGE] Activar cuenta');
+        });
+
+});

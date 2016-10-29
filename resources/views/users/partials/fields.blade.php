@@ -1,6 +1,11 @@
 <div class="form-group">
-    {!! Form::label('description', 'Descripcion', ['class' => 'col-sm-2']) !!}
-    {!! Form::text('description' , null , ['class' => 'form-control ', 'autocomplete' => 'off' ]) !!}
+    {!! Form::label('first_name', 'Nombre', ['class' => 'col-sm-2']) !!}
+    {!! Form::text('first_name' , null , ['class' => 'form-control ', 'autocomplete' => 'off' ]) !!}
+</div>
+
+<div class="form-group">
+    {!! Form::label('last_name', 'Apellido', ['class' => 'col-sm-2']) !!}
+    {!! Form::text('last_name' , null , ['class' => 'form-control ', 'autocomplete' => 'off' ]) !!}
 </div>
 
 <div class="form-group">

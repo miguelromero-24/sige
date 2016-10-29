@@ -1,11 +1,10 @@
-@section('page_styles')
-@parent
+@section('extra_css')
         <!-- iCheck for checkboxes and radio inputs -->
-<link href="{{ "/bower_components/admin-lte/plugins/iCheck/all.css" }}" rel="stylesheet" type="text/css"/>
+<link href="{{ asset("dash/css/iCheck/all.css") }}" rel="stylesheet"/>
 @append
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-info" >
+        <div class="panel panel-info">
             <div class="panel-heading">Permisos</div>
             <br/>
             <table class="table table-bordered">
@@ -13,7 +12,8 @@
                     @for($i = 0; $i < $permissions->count(); $i++)
                         <td style="border: none; text-align: left">
 
-                            <input type="checkbox" name="permissions[{{ $permissions[$i]->permission }}][state]" id="{{ $permissions[$i]->id }}"
+                            <input type="checkbox" name="permissions[{{ $permissions[$i]->permission }}][state]"
+                                   id="{{ $permissions[$i]->id }}"
                                    @if($permissions[$i]->has) checked @endif value="true"/>
 
                             <label for="{{ $permissions[$i]->id }}">
@@ -36,9 +36,8 @@
     </div>
 </div>
 @section('js')
-@parent
         <!-- iCheck 1.0.1 -->
-<script src="{{"/bower_components/admin-lte/plugins/iCheck/icheck.min.js" }}" type="text/javascript"></script>
+<script src="{{ asset('dash/js/iCheck/icheck.min.js') }}" type="text/javascript"></script>
 <script>
     $('input[type=checkbox], input[type=radio]').each(function () {
         var self = $(this),
@@ -55,7 +54,7 @@
         var uncheckedCheckboxClass = "icheckbox_line-grey";
         var uncheckedRadioClass = "iradio_line-grey";
 
-        if(inheritedInput.val() == '0'){
+        if (inheritedInput.val() == '0') {
             checkedCheckboxClass = 'icheckbox_line-purple checked';
             checkedRadioClass = 'iradio_line-purple checked';
             uncheckedCheckboxClass = "icheckbox_line-aero";

@@ -22,7 +22,7 @@ class User extends EloquentUser
      * The atributes that are mass assignable
      * @var array
      */
-    protected $fillable = ['description', 'username', 'email', 'password', 'owner_id', 'branch_id',
+    protected $fillable = ['first_name', 'last_name', 'username', 'email', 'password', 'owner_id', 'branch_id',
         'reset_password_code', 'reset_password'];
 
     protected $loginNames = ['username'];
