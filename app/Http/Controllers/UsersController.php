@@ -38,6 +38,12 @@ class UsersController extends Controller
      */
     public function index()
     {
+//        if (!$this->user->hasAccess('users')) {
+//            \Log::error('Unauthorized access attempt',
+//                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
+//            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+//        }
+
         $users = User::paginate(20);
         return view('users.index', compact('users'));
     }
@@ -49,6 +55,12 @@ class UsersController extends Controller
      */
     public function create()
     {
+        if (!$this->user->hasAccess('users.add|edit')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'action' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+        
         $permissions = Permission::orderBy('permission')->get();
         $rolesList = Role::all(['id', 'name']);
         $rolesJson = json_encode($rolesList);
@@ -67,6 +79,12 @@ class UsersController extends Controller
      */
     public function store(UsersRequest $request, Password $password)
     {
+        if (!$this->user->hasAccess('users.add|edit')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'action' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+        
         \Log::debug("New user inbound");
         $input = $request->all();
         $generatePass = $password->generatePassword();
@@ -187,6 +205,12 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+        if (!$this->user->hasAccess('users.add|edit')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'action' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+        
         if ($user = User::with('roles')->find($id)) {
 
             $processedPermissions = $user->getProcessedPermissions()->all();
@@ -235,6 +259,12 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!$this->user->hasAccess('users.add|edit')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'action' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+
         // Get User with Roles
         if ($user = User::with('roles')->find($id)) {
             // Get the form input
@@ -267,16 +297,17 @@ class UsersController extends Controller
             $credentials = [
                 'username' => $input['username'],
                 'email' => $input['email'],
-                'description' => $input['description']
+                'first_name' => $input['first_name'],
+                'last_name' => $input['last_name']
             ];
 
-            if (\Sentinel::getUser()->isSuperUser()) {
-                if (isset($input['owners']) AND empty($input['owners'])) {
-                    $credentials['owner_id'] = null;
-                } else {
-                    $credentials['owner_id'] = $request->get('owners');
-                }
-            }
+//            if (\Sentinel::getUser()->isSuperUser()) {
+//                if (isset($input['owners']) AND empty($input['owners'])) {
+//                    $credentials['owner_id'] = null;
+//                } else {
+//                    $credentials['owner_id'] = $request->get('owners');
+//                }
+//            }
 
             // Get array of the User's current Roles IDs
             $currentRoles = [];
@@ -341,6 +372,12 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        if (!$this->user->hasAccess('users.delete')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'action' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+        
         $message = '';
         $error = '';
 

@@ -15,7 +15,6 @@
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
-                        <th>Rol</th>
                         <th>Creado</th>
                         <th>Modificado</th>
                         <th>Estado</th>
@@ -29,7 +28,6 @@
                             <td>{{ $user->first_name }}</td>
                             <td>{{ $user->last_name}}</td>
                             <td>{{ $user->email }}</td>
-                            <td>------</td>
                             <td>{{ $user->created_at }}</td>
                             <td>{{ $user->updated_at }}</td>
                             <td>{{ $user->status }}</td>

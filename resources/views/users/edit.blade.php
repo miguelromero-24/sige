@@ -7,7 +7,7 @@
                     Nuevo Usuario
                 </header>
                 <div class="panel-body">
-                    {!! Form::model($user, array('route' => 'users.update', 'method' => 'put', 'id' => 'usersNew', 'class' => 'form-horizontal')) !!}
+                    {!! Form::model($user, array('route' => ['users.update', $user->id], 'method' => 'put', 'id' => 'usersNew', 'class' => 'form-horizontal')) !!}
                     <div class="row">
                         <div class="col-md-3">
                             @include('users.partials.fields')

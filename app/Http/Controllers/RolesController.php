@@ -12,6 +12,13 @@ use Session;
 
 class RolesController extends Controller
 {
+    protected $user;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->user = \Sentinel::getUser();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,6 +26,12 @@ class RolesController extends Controller
      */
     public function index()
     {
+        if (!$this->user->hasAccess('roles')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+        
         $roles = Role::paginate(20);
         return view('roles.index', compact('roles'));
     }
@@ -30,6 +43,12 @@ class RolesController extends Controller
      */
     public function create()
     {
+        if (!$this->user->hasAccess('roles.add|edit')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+        
         $permissions = Permission::orderBy('permission')->get();
         return view('roles.create', compact('permissions'));
     }
@@ -42,6 +61,12 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        if (!$this->user->hasAccess('roles.add|edit')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+
         $input = $request->all();
 
         $rolePermissions = [];
@@ -76,6 +101,12 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
+        if (!$this->user->hasAccess('roles.add|edit')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+        
         if ($role = Role::find($id)){
             $permissions = Permission::orderBy('permission')->get();
 
@@ -102,6 +133,12 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!$this->user->hasAccess('roles.add|edit')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+        
         if (!$role = Role::find($id)){
             Session::flash('error_message', 'Rol no encontrado');
             return redirect('roles');
@@ -152,6 +189,12 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
+        if (!$this->user->hasAccess('roles.delete')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+        
         $message = '';
         $error = '';
         if ($role = Role::find($id)) {

@@ -11,8 +11,8 @@
             </li>
             <li class="sub-menu">
                 <a href="javascript:;" class="">
-                    <i class="icon_cogs"></i>
-                    <span>Administracion</span>
+                    <i class="icon_shield"></i>
+                    <span>Seguridad</span>
                     <span class="menu-arrow arrow_carrot-right"></span>
                 </a>
                 <ul class="sub">
@@ -22,16 +22,20 @@
                     {{--<li><a class="" href="grids.html">Grids</a></li>--}}
                 </ul>
             </li>
-            {{--<li class="sub-menu">--}}
-                {{--<a href="javascript:;" class="">--}}
-                    {{--<i class="icon_chat"></i>--}}
-                    {{--<span>Clientes</span>--}}
-                    {{--<span class="menu-arrow arrow_carrot-right"></span>--}}
-                {{--</a>--}}
-                {{--<ul class="sub">--}}
 
-                {{--</ul>--}}
-            {{--</li>--}}
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="icon_cogs"></i>
+                    <span>Administracion</span>
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="sub">
+                    <li><a href="{{ route('supervisions.index') }}"><i class="icon_briefcase"></i> Supervisiones</a></li>
+                    <li><a href="#"><i class="icon_building"></i> Colegios</a></li>
+                    <li><a href="#"><i class="icon_archive"></i> Docentes</a></li>
+                    <li><a href="#"><i class="icon_archive"></i> Inscripciones</a></li>
+                </ul>
+            </li>
             {{--<li class="sub-menu">--}}
                 {{--<a href="javascript:;" class="">--}}
                     {{--<i class="icon_desktop"></i>--}}

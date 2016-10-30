@@ -13,6 +13,14 @@ use Illuminate\Support\MessageBag;
 
 class PermissionsController extends Controller
 {
+    protected $user;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->user = \Sentinel::getUser();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +28,11 @@ class PermissionsController extends Controller
      */
     public function index()
     {
+        if (!$this->user->hasAccess('permissions')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
         $permissions = Permission::orderBy('id', 'asc')->paginate(20);
         return view('permissions.index', compact('permissions'));
     }
@@ -31,6 +44,11 @@ class PermissionsController extends Controller
      */
     public function create()
     {
+        if (!$this->user->hasAccess('permissions.add|edit')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
         
         $permission = \Session::get('permission', new Permission());
         return view('permissions.create', compact('permission'));
@@ -44,6 +62,12 @@ class PermissionsController extends Controller
      */
     public function store(PermissionRequest $request)
     {
+        if (!$this->user->hasAccess('permissions.add|edit')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+
         $input = $request->except('_token');
         $input['permission'] = strtolower(trim($input['permission']));
 
@@ -103,6 +127,12 @@ class PermissionsController extends Controller
      */
     public function edit($id)
     {
+        if (!$this->user->hasAccess('permissions.add|edit')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+
         if (!$permission = Permission::find($id)) {
             \Log::notice('Permission doesnt exists', ['action' => 'permissions.edit', 'id' => $id]);
             return redirect()
@@ -122,6 +152,12 @@ class PermissionsController extends Controller
      */
     public function update(PermissionRequest $request, $id)
     {
+        if (!$this->user->hasAccess('permissions.add|edit')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+
         $input = $request->except(['_token', '_method']);
 
         $input['permission'] = strtolower(trim($input['permission']));
@@ -175,6 +211,12 @@ class PermissionsController extends Controller
      */
     public function destroy($id)
     {
+        if (!$this->user->hasAccess('permissions.delete')) {
+            \Log::error('Unauthorized access attempt',
+                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
+            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        }
+        
         $message = '';
         $error = '';
 
