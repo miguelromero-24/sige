@@ -6,6 +6,7 @@ use App\Http\Requests\UsersRequest;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\Schools;
+use App\Models\Supervisions;
 use App\Models\User;
 use App\Services\Password;
 use Illuminate\Http\Request;
@@ -186,7 +187,43 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        if ($user = User::with('roles')->find($id)) {
+
+            $processedPermissions = $user->getProcessedPermissions()->all();
+
+            $permissions = Permission::orderBy('permission')->get();
+
+            foreach ($permissions as $permission) {
+                if (array_key_exists($permission->permission, $processedPermissions)) {
+                    $permission->has = $processedPermissions[$permission->permission]['state'];
+                    $permission->inherited = $processedPermissions[$permission->permission]['inherited'];
+                } else {
+                    $permission->has = null;
+                    $permission->inherited = null;
+                }
+            }
+
+            $rolesList = $user->roles()->select(['id', 'name'])->get();
+            $rolesIds = $rolesList->implode('id', ',');
+            $rolesList = Role::all(['id', 'name']);
+            $rolesJson = json_encode($rolesList);
+            $data = [
+                'user' => $user,
+                'rolesJson' => $rolesJson,
+                'rolesIds' => $rolesIds,
+                'permissions' => $permissions
+            ];
+
+
+//            $supervision = Supervisions::all(['name', 'id']);
+//            $data['supervisionJson'] = json_encode($supervision);
+//
+//            $schools = Schools::all(['description', 'id']);
+//            $data['schoolJson'] = json_encode($schools);
+            return view('users.edit', $data);
+        }
+
+        return redirect()->back()->with('error', 'Usuario no encontrado.');
     }
 
     /**
@@ -198,7 +235,102 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Get User with Roles
+        if ($user = User::with('roles')->find($id)) {
+            // Get the form input
+            $input = $request->all();
+
+            // Get the form input expected permissions
+            // Permissions Rules:
+            //  if state is null and inherited is 0 -> revoked permission user specific
+            //  if state is true and inherited is 0 -> grant permission user specific
+            //  if state is true and inherited is 1 -> already granted permission role inherited
+            //  if state is null and inherited is 1 -> already revoked permission role inherited
+            //  if state is null and inherited is null -> permission set in neither role nor user
+            $expectedPermissions = array_pull($input, 'permissions');
+            $expectedPermissions = empty($expectedPermissions) ? [] : $expectedPermissions;
+
+            foreach ($expectedPermissions as $p => $v) {
+                if (!isset($v['inherited']) OR $v['inherited'] === '0') {
+                    $user->updatePermission($p, isset($v['state']) ? filter_var($v['state'], FILTER_VALIDATE_BOOLEAN) : false, true);
+                }
+            }
+
+            if (!$user->save()) {
+                \Log::error('Cant update Users Permissions.', $input);
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('error', 'Problemas al actualizar registro.');
+            }
+            \Log::debug('Permissions Saved!. ', $input);
+            $credentials = [
+                'username' => $input['username'],
+                'email' => $input['email'],
+                'description' => $input['description']
+            ];
+
+            if (\Sentinel::getUser()->isSuperUser()) {
+                if (isset($input['owners']) AND empty($input['owners'])) {
+                    $credentials['owner_id'] = null;
+                } else {
+                    $credentials['owner_id'] = $request->get('owners');
+                }
+            }
+
+            // Get array of the User's current Roles IDs
+            $currentRoles = [];
+
+            if (!$user->roles->isEmpty())
+                $currentRoles = explode(',', $user->roles->implode('id', ','));
+
+            // Get arry of the User's expected Roles IDs
+            $expectedRoles = explode(',', $request->get('roles'));
+
+            // Prepare array of Roles to detach from User
+            if (!empty($currentRoles))
+                $toDetachRoles = array_diff($currentRoles, $expectedRoles);
+
+            if (!empty($toDetachRoles)) {
+                $user->roles()->detach($toDetachRoles);
+                \Log::info('Roles eliminados de Usuario: ' . $user->username, $toDetachRoles);
+            }
+
+            // Prepare array of Roles to attach to User
+            $toAttachRoles = array_diff($expectedRoles, $currentRoles);
+
+            if (!empty($toAttachRoles)) {
+                $user->roles()->attach($toAttachRoles);
+                \Log::info('Roles agregados a Usuario: ' . $user->username, $toAttachRoles);
+            }
+
+
+            // Check if the Branch selected is part of the User's Agent
+//            if (!empty($request->get('branch'))) {
+//                if (!$user->isSuperUser()) {
+//                    $permitedBranches = Branch::where('owner_id', '=', $user->owner_id)->get();
+//                    $wishedBranch = Branch::find($request->get('branch'));
+//
+//                    if ($permitedBranches->search($wishedBranch) === false)
+//                        \Log::warning("La sucursal asignada no pertenece a su red");
+//                    return redirect()->back()->with('error', 'La sucursal no pertenece a su Agente.');
+//                }
+//
+//                $credentials['branch_id'] = $input['branch'];
+//            }
+
+
+            // Update User with credentials
+            $user->update($credentials);
+            \Log::info("User {$user->description} updated successfully");
+            return redirect()
+                ->route('users.index')
+                ->with('success', 'Usuario actualizado.');
+        }
+
+        return redirect()
+            ->route('users.index')
+            ->with('error', 'Error al actualizar el Usuario.');
     }
 
     /**
@@ -209,6 +341,27 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $message = '';
+        $error = '';
+
+        if ($user = User::find($id)) {
+            if (User::destroy($id) !== false) {
+                \Log::info('User destroy.', $user->toArray());
+                $message =  'Usuario eliminado correctamente';
+                $error = false;
+            }else{
+                \Log::warning("Error while trying to destroy user: {$id}");
+                $message =  'Error al intentar eliminar el usuario';
+                $error = true;
+            }
+        }else{
+            \Log::warning("User {$id} not found");
+            $message =  'Usuario no encontrado';
+            $error = true;
+        }
+        return response()->json([
+            'error' => $error,
+            'message' => $message,
+        ]);
     }
 }
