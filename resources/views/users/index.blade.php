@@ -35,9 +35,8 @@
                             <td>{{ $user->status }}</td>
                             <td>
                                 <div class="btn-group">
-                                    <a class="btn btn-primary" href="{{ url("users/edit/{$user->id}") }}" title="Editar"><i class="icon_pencil"></i></a>
-                                    <a class="btn btn-danger" href="{{ url("users/destroy/{$user->id}") }}" title="Eliminar"><i class="icon_minus-06"></i></a>
-                                    <a class="btn btn-default" href="{{ url("users/details/{$user->id}") }}" title="Detalles"><i class="icon_plus"></i></a>
+                                    <a class="btn btn-primary" href="{{ route('users.edit',['id' => $user->id]) }}" title="Editar"><i class="icon_pencil"></i></a>
+                                    <a href="#" class="btn btn-danger"><i class="icon_minus-06"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -48,4 +47,11 @@
             </section>
         </div>
     </div>
-@stop
+    {!! Form::open(['route' => ['users.destroy', ':ROW_ID'],
+                                         'method' => 'DELETE', 'id' => 'form-delete']) !!}
+    {!! Form::close() !!}
+@endsection
+
+@section('js')
+    @include('partials._delete_row_js')
+@endsection

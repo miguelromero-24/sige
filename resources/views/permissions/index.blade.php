@@ -28,9 +28,10 @@
                                 <td>{{ $permission->created_at }}</td>
                                 <td>{{ $permission->updated_at }}</td>
                                 <td>
-                                    <a href="{{ route('permissions.edit',['id' => $permission->id])}}"><i
-                                                class="fa fa-edit"></i>Editar</a> |
-                                    <a href="#" class="btn-delete"><i class="fa fa-remove"></i> Eliminar</a>
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary" href="{{ route('permissions.edit',['id' => $permission->id]) }}" title="Editar"><i class="icon_pencil"></i></a>
+                                        <a href="#" class="btn btn-danger" title="Eliminar"><i class="icon_minus-06"></i></a>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

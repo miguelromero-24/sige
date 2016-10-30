@@ -225,7 +225,7 @@
                             <span class="profile-ava">
                                 <img alt="" src="{{ asset('dash/img/avatar1_small.jpg') }}">
                             </span>
-                    <span class="username"> @if(isset(Auth::user()->username)) {{ Auth::user()->username  }} @else --- @endif</span>
+                    <span class="username"> @if(isset(\Sentinel::getUser()->first_name)) {{ \Sentinel::getUser()->first_name  }} @else --- @endif</span>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu extended logout">

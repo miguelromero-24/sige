@@ -28,10 +28,10 @@
                                 <td>{{ date('d/m/y H:i', strtotime($role->created_at)) }} </td>
                                 <td>{{ date('d/m/y H:i', strtotime($role->updated_at)) }} </td>
                                 <td>
-                                    <a href="{{ route('roles.edit',['id' => $role->id])}}"><i
-                                                class="fa fa-edit"></i>Editar</a>
-                                    |
-                                    <a href="#" class="btn-delete"><i class="fa fa-remove"></i> Eliminar</a>
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary" href="{{ route('roles.edit',['id' => $role->id]) }}" title="Editar"><i class="icon_pencil"></i></a>
+                                        <a href="#" class="btn btn-danger" title="Eliminar"><i class="icon_minus-06"></i></a>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -41,7 +41,7 @@
             </section>
         </div>
     </div>
-    {!! Form::open(['route' => ['permissions.destroy', ':ROW_ID'],
+    {!! Form::open(['route' => ['roles.destroy', ':ROW_ID'],
                                          'method' => 'DELETE', 'id' => 'form-delete']) !!}
     {!! Form::close() !!}
 @endsection
