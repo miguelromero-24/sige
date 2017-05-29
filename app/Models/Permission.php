@@ -13,13 +13,6 @@ class Permission extends Model implements PermissionsInterface
     }
 
     /**
-     * The connection name for the model.
-     *
-     * @var string
-     */
-    protected $connection = 'sige_auth';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array

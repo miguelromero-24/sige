@@ -4,13 +4,5 @@ use Cartalyst\Sentinel\Reminders\EloquentReminder;
 
 class Reminder extends EloquentReminder
 {
-
-    /**
-     * The connection name for the model.
-     *
-     * @var string
-     */
-    protected $connection = 'sige_auth';
-
-
+    protected $table = 'reminder';
 }

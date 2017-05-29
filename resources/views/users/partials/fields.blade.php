@@ -14,18 +14,18 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('email', 'E-mail', ['class' => 'col-sm-2']) !!}
+    {!! Form::label('email', 'Email', ['class' => 'col-sm-2']) !!}
     {!! Form::text('email' , null , ['class' => 'form-control', 'placeholder' => 'Introduzca e-mail', 'autocomplete' => 'off' ]) !!}
 </div>
 
 <div class="form-group">
-    {!! Form::label('roles', 'Roles de Usuario:', ['class' => 'col-sm-6']) !!}
+    {!! Form::label('roles', 'Roles:', ['class' => 'col-sm-6']) !!}
     {!! Form::text('roles', !empty($rolesIds) ? $rolesIds : null, ['class' => 'form-control input-lg',
     'id' =>
     'selectRoles', 'placeholder' => 'Seleccione un Rol de Usuario']) !!}
 </div>
 
-
+<button type="submit" class="btn btn-primary">Guardar</button>
 @section('js')
     <script>
         $('#selectRoles').selectize({

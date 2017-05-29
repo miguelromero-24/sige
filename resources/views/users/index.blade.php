@@ -1,4 +1,14 @@
 @extends('template')
+@section('breadcrumb')
+    <div class="row">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li><i class="fa fa-home"></i><a href="{{ route('home') }}">Home</a></li>
+                <li><i class="fa fa-user"></i>Usuarios</li>
+            </ol>
+        </div>
+    </div>
+@endsection
 @section('main')
     <div class="row">
         <div class="col-sm-10">

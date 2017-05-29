@@ -5,8 +5,6 @@ use Cartalyst\Sentinel\Throttling\EloquentThrottle;
 class Throttle extends EloquentThrottle
 {
 
-    protected $connection = 'sige_auth';
-
     /**
      * The attributes that should be mutated to dates.
      *

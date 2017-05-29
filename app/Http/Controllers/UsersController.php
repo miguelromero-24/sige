@@ -55,11 +55,11 @@ class UsersController extends Controller
      */
     public function create()
     {
-        if (!$this->user->hasAccess('users.add|edit')) {
-            \Log::error('Unauthorized access attempt',
-                ['user' => $this->user->username, 'action' => \Request::route()->getActionName()]);
-            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
-        }
+        //if (!$this->user->hasAccess('users.add|edit')) {
+        //    \Log::error('Unauthorized access attempt',
+        //        ['user' => $this->user->username, 'action' => \Request::route()->getActionName()]);
+        //    return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        //}
         
         $permissions = Permission::orderBy('permission')->get();
         $rolesList = Role::all(['id', 'name']);
@@ -79,12 +79,12 @@ class UsersController extends Controller
      */
     public function store(UsersRequest $request, Password $password)
     {
-        if (!$this->user->hasAccess('users.add|edit')) {
-            \Log::error('Unauthorized access attempt',
-                ['user' => $this->user->username, 'action' => \Request::route()->getActionName()]);
-            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
-        }
-        
+        //if (!$this->user->hasAccess('users.add|edit')) {
+         //   \Log::error('Unauthorized access attempt',
+         //       ['user' => $this->user->username, 'action' => \Request::route()->getActionName()]);
+         //   return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+        //}
+
         \Log::debug("New user inbound");
         $input = $request->all();
         $generatePass = $password->generatePassword();
@@ -102,7 +102,8 @@ class UsersController extends Controller
             'first_name' => $input['first_name'],
             'last_name' => $input['last_name'],
             'password' => $generatePass,
-            'supervision_id' => 1
+            'supervision_id' => 1,
+            'permissions' => $input['permissions']
         ];
         \Log::debug("New users credentials \n" . print_r($credentials, true));
 //        if (!empty($request->get('school_id'))){
@@ -205,11 +206,11 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        if (!$this->user->hasAccess('users.add|edit')) {
-            \Log::error('Unauthorized access attempt',
-                ['user' => $this->user->username, 'action' => \Request::route()->getActionName()]);
-            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
-        }
+//        if (!$this->user->hasAccess('users.add|edit')) {
+//            \Log::error('Unauthorized access attempt',
+//                ['user' => $this->user->username, 'action' => \Request::route()->getActionName()]);
+//            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+//        }
         
         if ($user = User::with('roles')->find($id)) {
 

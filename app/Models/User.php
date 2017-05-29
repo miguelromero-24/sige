@@ -13,17 +13,11 @@ class User extends EloquentUser
     protected $dates = ['deleted_at', 'last_login'];
 
     /**
-     * The connection name for the model
-     * @var string
-     */
-    protected $connection = 'sige_auth';
-
-    /**
      * The atributes that are mass assignable
      * @var array
      */
     protected $fillable = ['first_name', 'last_name', 'username', 'email', 'password', 'owner_id', 'branch_id',
-        'reset_password_code', 'reset_password'];
+        'reset_password_code', 'reset_password', 'permissions'];
 
     protected $loginNames = ['username'];
     /**

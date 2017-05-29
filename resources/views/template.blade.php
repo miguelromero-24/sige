@@ -21,7 +21,7 @@
     <section id="main-content">
         <section class="wrapper">
 
-            @include('partials.breadcrumb')
+            @yield('breadcrumb')
 
             @yield('main')
 

@@ -15,4 +15,3 @@
         {!! Form::text('description',null , array('class' => 'form-control')) !!}
     </div>
 </div>
-

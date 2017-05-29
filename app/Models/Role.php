@@ -6,11 +6,6 @@ use Cartalyst\Sentinel\Roles\EloquentRole;
 
 class Role extends EloquentRole
 {
-    /**
-     * The connection name for the model
-     * @var string
-     */
-    protected $connection = 'sige_auth';
 
     /**
      * The values that are mass assignable
