@@ -5,10 +5,10 @@
         Activación de Cuenta</h1>
 
     <p style="Margin-top:0;color:#565656;font-family:Georgia,serif;font-size:16px;line-height:25px;Margin-bottom:25px">
-        Hola <b style="font-weight:bold">{{ $user->username }}</b>!</p>
+        Hola <b style="font-weight:bold">{{ $user->first_name }}</b>!</p>
 
     <p style="Margin-top:0;color:#565656;font-family:Georgia,serif;font-size:16px;line-height:25px;Margin-bottom:25px">
-        Bienvenido/a a <b style="font-weight:bold">EGLOBALT</b>,
+        Bienvenido/a a <b style="font-weight:bold">SIGE</b>,
         para activar su cuenta y empezar a utilizar el sistema,
         por favor visite el siguiente enlace:
     </p>

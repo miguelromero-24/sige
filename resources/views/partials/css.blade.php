@@ -1,5 +1,6 @@
 <!-- Bootstrap CSS -->
 <link href="{{ asset('dash/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ asset('dash/css/jquery-ui-1.10.4.min.css') }}" rel="stylesheet">
 <!-- bootstrap theme -->
 <link href="{{ asset('dash/css/bootstrap-theme.css') }}" rel="stylesheet">
 <link href="{{ asset('dash/css/sweetalert/sweetalert.css') }}" rel="stylesheet">
@@ -21,5 +22,4 @@
 <link href="{{ asset('dash/css/style.css') }}" rel="stylesheet">
 <link href="{{ asset('dash/css/style-responsive.css') }}" rel="stylesheet" />
 <link href="{{ asset('dash/css/xcharts.min.css') }}" rel=" stylesheet">
-<link href="{{ asset('dash/css/jquery-ui-1.10.4.min.css') }}" rel="stylesheet">
 <link href="{{ asset('dash/css/selectize/selectize.bootstrap3.css') }}" rel="stylesheet">

@@ -5,30 +5,31 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Schools extends Model
+class Teachers extends Model
 {
     use SoftDeletes;
     /**
      * The database table used by the model
      * @var string
      */
-    protected $table = 'schools';
+    protected $table = 'teachers';
 
     /**
      * The attribute that are mass assignable
      * @var array
      */
-    protected $fillable = ['description', 'address', 'principal', 'city_id', 'supervision_id', 'telephone', 'email'];
+    protected $fillable = ['first_name', 'last_name', 'birthday', 'cellphone', 'email', 'city_id'];
 
     protected $dates = ['deleted_at', 'created_at', 'updated_at'];
-    
-    public function supervision()
-    {
-        return $this->hasOne('App\Models\Supervisions', 'id', 'supervision_id');
-    }
 
     public function cities()
     {
         return $this->belongsTo('App\Models\Cities', 'city_id');
     }
+
+    public function schools()
+    {
+        return $this->belongsToMany('App\Models\Schools', 'school_teachers', 'teacher_id', 'school_id');
+    }
+
 }

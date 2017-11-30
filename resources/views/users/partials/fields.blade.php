@@ -9,11 +9,6 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('username', 'Usuario', ['class' => 'col-sm-2']) !!}
-    {!! Form::text('username' , null , ['class' => 'form-control', 'placeholder' => 'Introduzca nombre de usuario', 'autocomplete' => 'off' ]) !!}
-</div>
-
-<div class="form-group">
     {!! Form::label('email', 'Email', ['class' => 'col-sm-2']) !!}
     {!! Form::text('email' , null , ['class' => 'form-control', 'placeholder' => 'Introduzca e-mail', 'autocomplete' => 'off' ]) !!}
 </div>

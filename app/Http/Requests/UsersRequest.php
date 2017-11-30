@@ -22,7 +22,6 @@ class UsersRequest extends Request
         return [
             'first_name'   => 'required|min:3|max:100',
             'last_name'   => 'required|min:3|max:100',
-            'username'      => 'required|min:3|max:100',
             'email'         => 'required|email',
             'roles'       => 'required',
         ];

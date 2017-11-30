@@ -23,7 +23,7 @@ class LoginRequest extends Request
     public function rules()
     {
         return [
-            'username'   => 'required',
+            'email'   => 'required',
             'password'      => 'required',
         ];
     }
@@ -35,7 +35,7 @@ class LoginRequest extends Request
     public function messages()
     {
         return [
-            'username.required' => 'El campo Usuario es obligatorio.',
+            'email.required' => 'El campo Email es obligatorio.',
             'password.required' => 'El campo Contraseña es obligatorio.'
         ];
     }

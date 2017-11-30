@@ -26,8 +26,8 @@ class UsersController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->user = \Sentinel::getUser();
+//        $this->middleware('auth');
+//        $this->user = \Sentinel::getUser();
     }
 
 
@@ -97,7 +97,6 @@ class UsersController extends Controller
 //        }
 
         $credentials = [
-            'username' => $input['username'],
             'email' => $input['email'],
             'first_name' => $input['first_name'],
             'last_name' => $input['last_name'],
@@ -148,17 +147,18 @@ class UsersController extends Controller
         // Temporal
         \Log::info("Activation Code: {$activation->code}");
 
-        Mail::send('mails.account_activation', $data,
-            function ($message) use ($user) {
-                $message->to($user->email, $user->username)->subject('[SIGE] Activar cuenta');
-            });
-
         $expectedRoles = $input['roles'];
 
         if (!empty($expectedRoles)) {
             $user->roles()->attach($expectedRoles);
-            //\Log::info('Roles agregados a Usuario: ' . $user->username, $expectedRoles);
+            \Log::info('Roles agregados a Usuario: ' . $user->email);
         }
+        Mail::send('mails.account_activation', $data,
+            function ($message) use ($user) {
+                $message->to($user->email, $user->first_name . ' ' . $user->last_name)->subject('[SIGE] Activar cuenta');
+            });
+
+
 
         return redirect()->route('users.index')
             ->with('success', 'Usuario creado exitosamente.');

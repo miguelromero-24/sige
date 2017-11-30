@@ -16,8 +16,8 @@ class RolesController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->user = \Sentinel::getUser();
+//        $this->middleware('auth');
+//        $this->user = \Sentinel::getUser();
     }
     /**
      * Display a listing of the resource.
@@ -61,11 +61,11 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        if (!$this->user->hasAccess('roles.add|edit')) {
-            \Log::error('Unauthorized access attempt',
-                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
-            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
-        }
+//        if (!$this->user->hasAccess('roles.add|edit')) {
+//            \Log::error('Unauthorized access attempt',
+//                ['user' => $this->user->username, 'route' => \Request::route()->getActionName()]);
+//            return redirect('/')->with('error', 'No posee permisos para realizar esta accion.');
+//        }
 
         $input = $request->all();
 

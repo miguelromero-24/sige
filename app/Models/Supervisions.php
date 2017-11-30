@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Supervisions extends Model
 {
-    use SoftDeletes;
-
     /**
      * The database table used by the Model
      * @var string
@@ -21,7 +19,7 @@ class Supervisions extends Model
      */
     protected $fillable = ['description'];
 
-    protected $dates = ['deleted_at', 'created_at', 'updated_at'];
+    protected $dates = ['created_at', 'updated_at'];
 
     public function schools()
     {

@@ -31,7 +31,7 @@
                 </a>
                 <ul class="sub">
                     <li><a href="{{ route('supervisions.index') }}"><i class="icon_briefcase"></i> Supervisiones</a></li>
-                    <li><a href="#"><i class="icon_building"></i> Colegios</a></li>
+                    <li><a href="{{ route('schools.index') }}"><i class="icon_building"></i> Colegios</a></li>
                     <li><a href="{{ route('teachers.index') }}"><i class="icon_archive"></i> Docentes</a></li>
                     <li><a href="{{ route('inscriptions.index') }}"><i class="icon_archive"></i> Inscripciones</a></li>
                 </ul>
@@ -43,7 +43,7 @@
                     <span class="menu-arrow arrow_carrot-right"></span>
                 </a>
                 <ul class="sub">
-                    <li><a href="{{ route('supervisions.index') }}"><i class="icon_bag"></i> Cursos</a></li>
+                    <li><a href="{{ route('courses.index') }}"><i class="icon_bag"></i> Cursos</a></li>
                     <li><a href="#"><i class="icon_tablet"></i> Estudiantes</a></li>
                     <li><a href="{{ route('teachers.index') }}"><i class="icon_check"></i> Materias</a></li>
                     <li><a href="{{ route('inscriptions.index') }}"><i class="icon_calculator_alt"></i> Calificaciones</a></li>

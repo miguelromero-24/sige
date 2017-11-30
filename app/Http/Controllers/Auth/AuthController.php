@@ -47,13 +47,13 @@ class AuthController extends Controller
     {
         $ex = null;
         $credentials = [
-            'username'  => $request->get('username'),
+            'email'  => $request->get('email'),
             'password'  => $request->get('password')
         ];
 
         try {
             if (\Sentinel::authenticate($credentials)){
-                \Log::info("User logged in", ['user' => $credentials['username']]);
+                \Log::info("User logged in", ['user' => $credentials['email']]);
                 return redirect()->intended()->with('success', 'Sesion iniciada Correctamente');
             }
 
@@ -69,7 +69,7 @@ class AuthController extends Controller
             $error = "Su cuenta ha sido bloqueada por {$delay} segundo(s)";
         }
 
-        \Log::warning($ex->getMessage(), [\Request::get('username')]);
+        \Log::warning($ex->getMessage(), [\Request::get('email')]);
 
         return redirect('login')->withInput()->withErrors($error);
     }

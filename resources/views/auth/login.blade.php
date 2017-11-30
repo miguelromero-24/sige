@@ -23,7 +23,7 @@
 
         <div class="input-group">
             <span class="input-group-addon"><i class="icon_profile"></i></span>
-            {!! Form::text('username', null, array('class' => 'form-control', 'placeholder' => 'Usuario')) !!}
+            {!! Form::text('email', null, array('class' => 'form-control', 'placeholder' => 'Email')) !!}
         </div>
         <div class="input-group">
             <span class="input-group-addon"><i class="icon_key_alt"></i></span>
